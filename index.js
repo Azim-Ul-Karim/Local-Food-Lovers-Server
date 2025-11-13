@@ -31,7 +31,13 @@ async function run() {
         const usersCollection = loversDB.collection('users');
         const favoritesCollection = loversDB.collection('favorites');
 
-        
+        // Reviews Collection
+
+        app.get('/reviews', async (req, res) => {
+            const cursor = reviewsCollection.find().sort({ dateAdded: -1 });
+            const result = await cursor.toArray();
+            res.send(result);
+        })
     } finally {
         // await client.close();
     }
