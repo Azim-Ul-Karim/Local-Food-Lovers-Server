@@ -38,6 +38,12 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         })
+
+        app.get('/featured-reviews', async (req, res) => {
+            const cursor = reviewsCollection.find().sort({ rating: -1 }).limit(6);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
     } finally {
         // await client.close();
     }
