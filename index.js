@@ -22,6 +22,22 @@ app.get('/', (req, res) => {
     res.send('Welcome to Local Food Lovers Network!')
 })
 
+async function run() {
+    try {
+        await client.connect();
+
+        const loversDB = client.db('Local_Food_Lovers_DB');
+        const reviewsCollection = loversDB.collection('reviews');
+        const usersCollection = loversDB.collection('users');
+        const favoritesCollection = loversDB.collection('favorites');
+
+        
+    } finally {
+        // await client.close();
+    }
+}
+run().catch(console.dir);
+
 app.listen(port, () => {
     console.log(`LFLN is using port ${port}!`);
 })
