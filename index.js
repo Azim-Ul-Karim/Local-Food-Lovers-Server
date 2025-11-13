@@ -57,6 +57,14 @@ async function run() {
             const result = await reviewsCollection.insertOne(newReview);
             res.send(result);
         })
+
+        app.get('/my-reviews', async (req, res) => {
+            const email = req.query.email;
+            const query = { userEmail: email };
+            const cursor = reviewsCollection.find(query).sort({ dateAdded: -1 });
+            const result = await cursor.toArray();
+            res.send(result);
+        });
     } finally {
         // await client.close();
     }
